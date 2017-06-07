@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <title>notes</title>
 </head>
+<style type="text/css">
+    .caption1{
+        font-size:40px;text-align:center;
+    }
+    .caption2{
+        font-size:30px;text-align:center;
+    }
+    .text{
+        font-size:20px;
+    }
+</style>
 <body>
-<div id="Linux命令格式">
-    u所有者 g所属组 o其他人<br/>
+<div class="text">
+    <h1 class="caption1">1:Linux命令格式</h1><br/>
+    <p>u所有者 g所属组 o其他人<br/>
     r读 w写 x执行<br/>
     .代表ACL权限<br/>
     1代表引用计数 代表文件被调用过几次<br/>
@@ -16,6 +28,26 @@
     ls -ld /etc/ 看到etc目录本身的权限<br>
     总结:<br>
     -a:隐藏文件 －l显示详细信息 －d查看目录属性 －h人性化显示文件大小 －i显示inode（安装时通过inode查找文件位置）<br/>
+    </p>
+</div>
+<br/><br/><br/>
+<div class="text">
+    <h1 class="caption1">2:文件处理命令</h1>
+    <div id="目录处理命令">
+        建立目录：mkdir（make directories）<br/>
+        -p递归创建 mkdir -p gjt/gjt2 <br/>
+        切换目录:cd ~家目录 －进入上次目录 ..进入上一级目录 .进入当前目录<br/>
+        pwd:查看当前工作目录的完整路径<br/>
+    </div>
+    <div id="文件处理命令">
+
+    </div>
+    <div id="链接命令">
+
+    </div>
+    <div id="others">
+
+    </div>
 </div>
 </body>
 </html>
