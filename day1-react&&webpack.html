@@ -1,0 +1,21 @@
+About React:
+了解react的生命周期：mounted update unmounted
+mounted:getDefaultProps->getinitialstate->componentWillMount->render->componentDidMount
+update(一个被mounted的react components重新render的过程): setstate()orsetProps之后都会有一个判断，如果state或者props改变了的话就会重新执行render操作
+每一个状态的react都封装了对应的hook函数
+unmounted
+
+About webpack:
+webpack的安装：npm install webpack --save-dev 注意这里要在全局和对应的项目文件夹分别安装webpack
+module.exports 注意output的路径为绝对路径
+注意遍历的写法：<% for(var key in htmlWebpackPlugin.files){
+ %> <%= key %> : <%= JSON.stringify(htmlWebpackPlugin.files[key]) %> <%
+ } %>
+手动打包 webpack--config webpack.config.js --progress --display-modules --colors --display-reason
+name hash
+plugin
+注意plugins:{
+inject:false,
+//inject:'head',
+}
+chunks这些东西
