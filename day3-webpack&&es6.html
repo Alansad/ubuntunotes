@@ -1,0 +1,108 @@
+<script type="text/javascript">
+    <%= compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substr(htmlWebpackPlugin.files.publicPath.length)]%>
+</script>
+插入指定文件的内容,要注意首先config文件里面entry里有要这个文件
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webpack app</title>
+    <script type="text/javascript">
+        <%= compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substr(htmlWebpackPlugin.files.publicPath.length)]%>
+    </script>
+</head>
+<body>
+<% for(var key in htmlWebpackPlugin.files.chunks) { %>
+<% if(key !== 'main'){ %>
+<script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[key].entry %>">
+
+</script>
+<% } %>
+<% }%>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!--<%= htmlWebpackPlugin.options.title %>--></title>
+    <!--<script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>-->
+</head>
+<body>
+<!--<script type="text/javascript" src="bundle.js">
+
+</script>-->
+<!--<% for(var key in htmlWebpackPlugin.files){
+ %> <%= key %> : <%= JSON.stringify(htmlWebpackPlugin.files[key]) %> <%
+ } %>
+<% for(var key in htmlWebpackPlugin.options){
+ %> <%= key %> : <%= JSON.stringify(htmlWebpackPlugin.options[key]) %> <%
+ } %>-->
+<!--<script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.a.entry %>"></script>-->
+</body>
+</html>
+注意在for和if这种函数外面是<%%>,在式子外面是<%=%>
+
+var htmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+entry:'./src/app.js',
+output:{
+path:'/Users/guojiantao/Desktop/webpack-test/dist',
+filename:'js/[name]-[chunkhash].js',
+publicPath:'http://cdn.com/'
+},
+plugins:[
+new htmlWebpackPlugin({
+filename:'a.html',
+template:'index.html',
+//inject:'body',
+//inject:'head',
+inject:false,
+title:'this is a.html',
+//chunks:['main','a']
+excludeChunks:['b','c']
+/*minify:{
+removeComments:true,
+collapseWhitespace:true
+}*/
+}),
+new htmlWebpackPlugin({
+filename:'b.html',
+template:'index.html',
+inject:false,
+//inject:'body',
+//inject:'head',
+title:'this is b.html',
+excludeChunks:['a','c']
+//chunks:['b']
+/*minify:{
+removeComments:true,
+collapseWhitespace:true
+}*/
+}),
+new htmlWebpackPlugin({
+filename:'c.html',
+template:'index.html',
+inject:false,
+//inject:'body',
+//inject:'head',
+title:'this is c.html',
+excludeChunks:['a','b']
+//chunks:['c']
+/*minify:{
+removeComments:true,
+collapseWhitespace:true
+}*/
+})
+]
+};
+About es6
+let命令:
+for循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。
+使用let，声明的变量仅在块级作用域内有效
+var命令会发生”变量提升“现象,let命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错。
+暂时性死区
+暂时性死区”也意味着typeof不再是一个百分之百安全的操作
+作为比较，如果一个变量根本没有被声明，使用typeof反而不会报错。有些“死区”比较隐蔽，不太容易发现
