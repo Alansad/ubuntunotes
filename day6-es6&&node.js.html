@@ -1,0 +1,44 @@
+es6:
+let和const命令：var会有变量提升，会先提升后var一个undefined值，const／let只在对应的块级作用域内有效，不提升
+               let不允许重复声明。
+               ES6 的块级作用域允许声明函数的规则，只在使用大括号的情况下成立，如果没有使用大括号，就会报错。
+               do表达式可以使块级作用域可以返回值
+               const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，const只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心
+变量的结构赋值:如果解构不成功，变量的值就等于undefined。
+             分为数组和对象（对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。）
+             所以，如果一个数组成员不严格等于undefined，默认值是不会生效的。
+             let { foo: foo, bar: bar } = { foo: "aaa", bar: "bbb" };
+             模块的思想：
+// 报错
+export 1;
+
+// 报错
+var m = 1;
+export m;
+上面两种写法都会报错，因为没有提供对外的接口。第一种写法直接输出1，第二种写法通过变量m，还是直接输出1。1只是一个值，不是接口。正确的写法是下面这样。
+
+// 写法一
+export var m = 1;
+
+// 写法二
+var m = 1;
+export {m};
+
+// 写法三
+var n = 1;
+export {n as m};
+
+注意：对于函数也是一样的
+
+node.js:1:http模块(createServer方法) http.createServer(function(req,res){}).listen(2015)
+        2:res.writeHead(200,{'Content-Type':'text/palin'})  res.write('Hello') res.end()
+        3:http性能测试：ab -n1000 -c10 http://www.imooc.com/
+        4:安装cheerio
+        5:events模块的EventEmitter对象 life.on和life.emit(返回值为是否被监听了)
+          life.removeListener()里面的函数要放具体的，不能放匿名函数
+          EventEmitter.listenerCount返回对应的life.on的数量
+
+others: 1:caller函数
+        2：eval函数
+        3：call和apply方法
+        4：➡️函数
